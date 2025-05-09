@@ -5,11 +5,23 @@ import path from "path";
 import cors from "cors";
 import { fileURLToPath } from "url";
 import { v4 as uuidv4 } from "uuid";
+import dotenv from "dotenv";
 
-//routes
+import nodemailer from "nodemailer";
 
+//.env configuratie laden
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+dotenv.config({ path: path.resolve(__dirname, ".env") });
+
+/*
+//debugging
+console.log("Email User:", process.env.EMAIL_USER);
+console.log("Email Pass:", process.env.EMAIL_PASS ? "Loaded" : "Not loaded");
+console.log("Current directory:", __dirname);
+*/
+//routes
+
 const app = express();
 const PORT = process.env.PORT || 5000;
 
@@ -181,6 +193,42 @@ app.get("/urenregistraties", (req, res) => {
   }
 
   return res.status(200).json(allHours);
+});
+
+// Contactformulier endpoint
+app.post("/contact", async (req, res) => {
+  const { name, message } = req.body;
+
+  if (!name || !message) {
+    return res.status(400).json({ message: "Naam en bericht zijn verplicht." });
+  }
+
+  try {
+    // Transporter instellen (voorbeeld met Gmail)
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
+    });
+
+    const mailOptions = {
+      from: "contactformulier@jouwdomein.nl",
+      to: "devtestrens@gmail.com",
+      subject: "Nieuw bericht via contactformulier",
+      text: `Naam: ${name}\n\nBericht:\n${message}`,
+    };
+
+    await transporter.sendMail(mailOptions);
+
+    res.status(200).json({ message: "Bericht succesvol verzonden." });
+  } catch (error) {
+    console.error("Fout bij verzenden mail:", error);
+    res
+      .status(500)
+      .json({ message: "Er is iets misgegaan bij het verzenden." });
+  }
 });
 
 // Start de server

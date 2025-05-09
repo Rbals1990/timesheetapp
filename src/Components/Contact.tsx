@@ -8,15 +8,31 @@ export default function Contact() {
   const [charCount, setCharCount] = useState(0);
   const [isPopupVisible, setPopupVisible] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Toon de pop-up
-    setPopupVisible(true);
 
-    // Na 3 seconden terugsturen naar de homepagina
-    setTimeout(() => {
-      navigate("/");
-    }, 3000);
+    try {
+      const response = await fetch("http://localhost:5000/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name, message }),
+      });
+
+      if (response.ok) {
+        setPopupVisible(true);
+        setTimeout(() => {
+          navigate("/");
+        }, 3000);
+      } else {
+        // Toon een foutmelding als de response niet OK is
+        alert("Er ging iets mis bij het verzenden van het bericht.");
+      }
+    } catch (error) {
+      console.error("Verzendfout:", error);
+      alert("Fout bij verzenden van bericht.");
+    }
   };
 
   const handleMessageChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -83,12 +99,9 @@ export default function Contact() {
         {/* Contact info */}
         <div className="mt-4 text-sm text-center md:text-left">
           <p>
-            Tel. nr: <span className="text-[#2D4739]">06-12345678</span>
-          </p>
-          <p>
             Email:{" "}
-            <a href="mailto:testmail@gmail.com" className="text-[#2D4739]">
-              testmail@gmail.com
+            <a href="mailto:devtestrens@gmail.com" className="text-[#2D4739]">
+              devtestrens@gmail.com
             </a>
           </p>
         </div>
