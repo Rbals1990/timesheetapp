@@ -1,0 +1,506 @@
+[
+  {
+    "userId": "1",
+    "week": 17,
+    "jaar": 2025,
+    "dagen": {
+      "maandag": {
+        "startTijd": "08:00",
+        "eindTijd": "16:30",
+        "pauze": 30,
+        "reistijd": 45,
+        "gewerkteTijd": 8
+      },
+      "dinsdag": {
+        "startTijd": "07:45",
+        "eindTijd": "16:15",
+        "pauze": 15,
+        "reistijd": 30,
+        "gewerkteTijd": 8.25
+      },
+      "woensdag": {
+        "startTijd": "08:00",
+        "eindTijd": "16:00",
+        "pauze": 60,
+        "reistijd": 0,
+        "gewerkteTijd": 7
+      },
+      "donderdag": {
+        "startTijd": "08:15",
+        "eindTijd": "17:00",
+        "pauze": 45,
+        "reistijd": 60,
+        "gewerkteTijd": 8
+      },
+      "vrijdag": {
+        "startTijd": "08:30",
+        "eindTijd": "15:00",
+        "pauze": 30,
+        "reistijd": 0,
+        "gewerkteTijd": 6
+      }
+    },
+    "totaalGewerkteTijd": 37.25,
+    "normaleWerkweek": 40,
+    "verschil": -2.75,
+    "opmerking": "Vrijdag eerder weg ivm tandarts",
+    "ingediend": true
+  },
+  {
+    "userId": "1",
+    "week": 2,
+    "jaar": 2025,
+    "dagen": {
+      "maandag": {
+        "startTijd": "09:00",
+        "eindTijd": "17:30",
+        "pauze": 30,
+        "reistijd": 30,
+        "gewerkteTijd": 8
+      },
+      "dinsdag": {
+        "startTijd": "09:00",
+        "eindTijd": "17:30",
+        "pauze": 30,
+        "reistijd": 30,
+        "gewerkteTijd": 8
+      },
+      "woensdag": {
+        "startTijd": "08:30",
+        "eindTijd": "17:00",
+        "pauze": 45,
+        "reistijd": 30,
+        "gewerkteTijd": 7.75
+      },
+      "donderdag": {
+        "startTijd": "08:00",
+        "eindTijd": "17:00",
+        "pauze": 45,
+        "reistijd": 30,
+        "gewerkteTijd": 8.25
+      },
+      "vrijdag": {
+        "startTijd": "08:30",
+        "eindTijd": "17:45",
+        "pauze": 15,
+        "reistijd": 30,
+        "gewerkteTijd": 9
+      }
+    },
+    "totaalGewerkteTijd": 40.75,
+    "normaleWerkweek": 40,
+    "verschil": 0.75,
+    "opmerking": "Vrijdag erg druk dus alleen kleine pauze gehouden",
+    "ingediend": true
+  },
+  {
+    "userId": "7f8d8574-a414-4a47-bfcb-e79393b20adc",
+    "weekNumber": "2",
+    "data": {
+      "Maandag": {
+        "start": "09:00",
+        "end": "18:00",
+        "break": "30",
+        "travel": "30"
+      },
+      "Dinsdag": {
+        "start": "08:30",
+        "end": "17:00",
+        "break": "30",
+        "travel": "30"
+      },
+      "Woensdag": {
+        "start": "09:00",
+        "end": "18:30",
+        "break": "30",
+        "travel": "30"
+      },
+      "Donderdag": {
+        "start": "09:00",
+        "end": "17:00",
+        "break": "30",
+        "travel": "30"
+      },
+      "Vrijdag": {
+        "start": "06:30",
+        "end": "15:45",
+        "break": "30",
+        "travel": "30"
+      }
+    },
+    "remarks": "test2",
+    "totalHours": "41.75",
+    "overUnderHours": "1.75",
+    "createdAt": "2025-05-07T12:12:26.439Z",
+    "ingediend": true
+  },
+  {
+    "userId": "7f8d8574-a414-4a47-bfcb-e79393b20adc",
+    "weekNumber": "3",
+    "data": {
+      "Maandag": {
+        "start": "09:00",
+        "end": "17:00",
+        "break": "30",
+        "travel": "30"
+      },
+      "Dinsdag": {
+        "start": "09:00",
+        "end": "18:00",
+        "break": "30",
+        "travel": "30"
+      },
+      "Woensdag": {
+        "start": "08:30",
+        "end": "16:30",
+        "break": "15",
+        "travel": "30"
+      },
+      "Donderdag": {
+        "start": "08:00",
+        "end": "16:30",
+        "break": "30",
+        "travel": "30"
+      },
+      "Vrijdag": {
+        "start": "08:30",
+        "end": "17:45",
+        "break": "15",
+        "travel": "30"
+      }
+    },
+    "remarks": "test3",
+    "totalHours": "41.25",
+    "overUnderHours": "1.25",
+    "createdAt": "2025-05-07T12:19:36.168Z",
+    "ingediend": true
+  },
+  {
+    "userId": "7f8d8574-a414-4a47-bfcb-e79393b20adc",
+    "weekNumber": 3,
+    "data": {
+      "Maandag": {
+        "start": "08:00",
+        "end": "17:00",
+        "break": "30",
+        "travel": "30"
+      },
+      "Dinsdag": {
+        "start": "08:00",
+        "end": "17:00",
+        "break": "30",
+        "travel": "30"
+      },
+      "Woensdag": {
+        "start": "08:30",
+        "end": "17:30",
+        "break": "30",
+        "travel": "30"
+      },
+      "Donderdag": {
+        "start": "09:00",
+        "end": "17:00",
+        "break": "30",
+        "travel": "30"
+      },
+      "Vrijdag": {
+        "start": "08:15",
+        "end": "16:45",
+        "break": "30",
+        "travel": "30"
+      }
+    },
+    "remarks": "test3",
+    "totalHours": "41.00",
+    "overUnderHours": "1.00",
+    "createdAt": "2025-05-07T12:29:26.024Z",
+    "ingediend": true
+  },
+  {
+    "userId": "827c2049-5ff9-4b1a-b115-2f4baca15190",
+    "weekNumber": 12,
+    "data": {
+      "Maandag": {
+        "start": "08:00",
+        "end": "16:30",
+        "break": "30",
+        "travel": "30"
+      },
+      "Dinsdag": {
+        "start": "08:00",
+        "end": "16:30",
+        "break": "30",
+        "travel": "30"
+      },
+      "Woensdag": {
+        "start": "08:00",
+        "end": "16:45",
+        "break": "30",
+        "travel": "30"
+      },
+      "Donderdag": {
+        "start": "08:00",
+        "end": "17:30",
+        "break": "30",
+        "travel": "30"
+      },
+      "Vrijdag": {
+        "start": "08:30",
+        "end": "17:45",
+        "break": "30",
+        "travel": "30"
+      }
+    },
+    "remarks": "test3",
+    "totalHours": "42.00",
+    "overUnderHours": "2.00",
+    "createdAt": "2025-05-07T14:51:52.808Z",
+    "ingediend": true
+  },
+  {
+    "userId": "c1ce3edf-284b-4ece-8e8a-cb2def18ecb8",
+    "weekNumber": 1,
+    "data": {
+      "Maandag": {
+        "start": "08:00",
+        "end": "16:30",
+        "break": "30",
+        "travel": ""
+      },
+      "Dinsdag": {
+        "start": "08:15",
+        "end": "16:45",
+        "break": "30",
+        "travel": "30"
+      },
+      "Woensdag": {
+        "start": "08:00",
+        "end": "17:30",
+        "break": "45",
+        "travel": "30"
+      },
+      "Donderdag": {
+        "start": "07:45",
+        "end": "16:15",
+        "break": "30",
+        "travel": "30"
+      },
+      "Vrijdag": {
+        "start": "08:00",
+        "end": "16:30",
+        "break": "30",
+        "travel": "30"
+      }
+    },
+    "remarks": "test voor arie",
+    "totalHours": "40.00",
+    "overUnderHours": "0.00",
+    "createdAt": "2025-05-07T14:56:45.230Z",
+    "ingediend": true
+  },
+  {
+    "userId": "4f58be70-25b4-44d3-b27a-4f8531587c49",
+    "weekNumber": 1,
+    "data": {
+      "Maandag": {
+        "start": "09:00",
+        "end": "17:30",
+        "break": "30",
+        "travel": "30"
+      },
+      "Dinsdag": {
+        "start": "08:30",
+        "end": "17:15",
+        "break": "30",
+        "travel": "30"
+      },
+      "Woensdag": {
+        "start": "09:00",
+        "end": "17:45",
+        "break": "15",
+        "travel": "30"
+      },
+      "Donderdag": {
+        "start": "10:00",
+        "end": "18:30",
+        "break": "45",
+        "travel": "30"
+      },
+      "Vrijdag": {
+        "start": "08:00",
+        "end": "17:30",
+        "break": "30",
+        "travel": "30"
+      }
+    },
+    "remarks": "week 1 test",
+    "totalHours": "41.50",
+    "overUnderHours": "1.50",
+    "createdAt": "2025-05-07T16:32:43.422Z",
+    "ingediend": true
+  },
+  {
+    "userId": "4f58be70-25b4-44d3-b27a-4f8531587c49",
+    "weekNumber": 2,
+    "data": {
+      "Maandag": {
+        "start": "08:15",
+        "end": "17:30",
+        "break": "30",
+        "travel": "30"
+      },
+      "Dinsdag": {
+        "start": "08:00",
+        "end": "16:15",
+        "break": "30",
+        "travel": "30"
+      },
+      "Woensdag": {
+        "start": "08:15",
+        "end": "17:00",
+        "break": "30",
+        "travel": "30"
+      },
+      "Donderdag": {
+        "start": "08:30",
+        "end": "17:15",
+        "break": "30",
+        "travel": "30"
+      },
+      "Vrijdag": {
+        "start": "08:00",
+        "end": "16:00",
+        "break": "30",
+        "travel": "30"
+      }
+    },
+    "remarks": "test week 2",
+    "totalHours": "40.50",
+    "overUnderHours": "0.50",
+    "createdAt": "2025-05-07T16:33:41.232Z",
+    "ingediend": true
+  },
+  {
+    "userId": "4f58be70-25b4-44d3-b27a-4f8531587c49",
+    "weekNumber": 5,
+    "data": {
+      "Maandag": {
+        "start": "09:00",
+        "end": "17:30",
+        "break": "30",
+        "travel": "30"
+      },
+      "Dinsdag": {
+        "start": "08:30",
+        "end": "17:15",
+        "break": "30",
+        "travel": "30"
+      },
+      "Woensdag": {
+        "start": "10:00",
+        "end": "18:15",
+        "break": "45",
+        "travel": "30"
+      },
+      "Donderdag": {
+        "start": "08:00",
+        "end": "16:15",
+        "break": "30",
+        "travel": "30"
+      },
+      "Vrijdag": {
+        "start": "09:00",
+        "end": "17:15",
+        "break": "30",
+        "travel": "30"
+      }
+    },
+    "remarks": "test excel export",
+    "totalHours": "39.00",
+    "overUnderHours": "-1.00",
+    "createdAt": "2025-05-07T17:27:57.773Z",
+    "ingediend": true
+  },
+  {
+    "userId": "4f58be70-25b4-44d3-b27a-4f8531587c49",
+    "weekNumber": 13,
+    "data": {
+      "Maandag": {
+        "start": "08:00",
+        "end": "16:30",
+        "break": "30",
+        "travel": "30"
+      },
+      "Dinsdag": {
+        "start": "08:00",
+        "end": "17:30",
+        "break": "45",
+        "travel": "30"
+      },
+      "Woensdag": {
+        "start": "09:00",
+        "end": "17:15",
+        "break": "30",
+        "travel": "30"
+      },
+      "Donderdag": {
+        "start": "08:00",
+        "end": "16:30",
+        "break": "30",
+        "travel": "30"
+      },
+      "Vrijdag": {
+        "start": "07:30",
+        "end": "16:30",
+        "break": "30",
+        "travel": "30"
+      }
+    },
+    "remarks": "test excel 2",
+    "totalHours": "40.75",
+    "overUnderHours": "0.75",
+    "createdAt": "2025-05-07T17:45:23.608Z",
+    "ingediend": true
+  },
+  {
+    "userId": "4f58be70-25b4-44d3-b27a-4f8531587c49",
+    "weekNumber": 15,
+    "data": {
+      "Maandag": {
+        "start": "09:00",
+        "end": "17:30",
+        "break": "30",
+        "travel": "30"
+      },
+      "Dinsdag": {
+        "start": "08:15",
+        "end": "17:15",
+        "break": "45",
+        "travel": "30"
+      },
+      "Woensdag": {
+        "start": "08:30",
+        "end": "17:45",
+        "break": "30",
+        "travel": "30"
+      },
+      "Donderdag": {
+        "start": "09:00",
+        "end": "17:15",
+        "break": "30",
+        "travel": "30"
+      },
+      "Vrijdag": {
+        "start": "08:00",
+        "end": "16:45",
+        "break": "30",
+        "travel": "30"
+      }
+    },
+    "remarks": "test excel 3",
+    "totalHours": "40.75",
+    "overUnderHours": "0.75",
+    "createdAt": "2025-05-07T17:51:04.250Z",
+    "ingediend": true
+  }
+]

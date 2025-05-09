@@ -1,0 +1,277 @@
+@import "tailwindcss";
+
+/* 
+colors: dark green:  "#2D4739"
+*/
+
+/* input voor invoeren:
+ik heb je eerder uitgelegd hoe de component hoort te werken voor het indienen van de wekelijkse uren (waar we een JSON bestand/database van maken). Dit gaan we nu maken. Heb je meer info nodig over hoe het werkt? Hieronder alvast hoe ik het qua structuur graag zie:
+Kleine schermen:
+bovenin een inputveld waar de gebruiker het weeknummer invult.
+Hieronder dikgedrukt de tekst "Maandag", daaronder kan de gebruiker dan de begintijd invoeren (door zelf te typen of dit middels een "klok" in te stellen. Daaronder de eindtijd met dezelfde opties, daaronder de genutigde pauze met een dropdown keuze menu uit: 15min, 30min, 45min of 60min, daaronder wordt de totaal gewerkte tijd getoond ( geklokte tijd - de pauze) daaronder kan de gebruiker de reistijd invullen in minuten.
+Hieronder komen dan de volgende dagen (dinsdag tm vrijdag) met dezelfde mogelijkheden/opties als de maandag.
+Onder alle gewerkte dagen krijgt de gebruiker te zien hoeveel er in totaal gewerkt is en of er teveel of te weinig is gewerkt (gebruiker logt in of registreert en hierbij worden de wekelijkse contracturen ingevuld) is er teveel gewerkt dan worden de teveel gewerkte uren groen weergegeven, is er te weinig gewerkt dan is dit getal rood. Is er geen contractomvang bekend dan gebruik je standaard 40 uur per week.
+Hieronder komt nog een opmerkingsveld waar de gebruiker iets in kan vullen. Daaronder 2 buttons naast elkaar. de eerste voor versturen (hierdoor wordt het formulier verstuurd, gebruiker krijgt de melding in beeld net als bij de contact pagina maar dan met de tekst "de uren zijn succesvol verstuurd" en keert na 3 seconden terug naar de homepagina. Dit werkt enkel bij een volledig ingevuld formulier, dus elke werkdag is volledig ingevuld. de 2e button is voor annuleren. Hierdoor gaat de gebruiker ook terug naar de homepagina en worden alle gegevens gewist. Graag voor dit gebeurt een melding in beeld waarbij de gebruiker moet bevestigen. gebruik de tekst "weet u zeker dat u terug wilt? wijzigingen gaan verloren" klikt de gebruiker ja dan gaat bovenstaande in werking, klikt deze op nee dan blijft de gebruiker waar hij is en kan hij verder met invoeren.
+
+Voor grotere schermen, logica e.d. blijft exact hetzelfde!:
+links bovenin kan de gebruiker het weeknummer invullen, hieronder staan de weekdagen onder elkaar (maandag tm vrijdag) en daarnaast van links naar rechts de in te vullen gegevens die de gebruiker aanlevert.
+Links onderin komt het opmerkingsveld voor de gebruiker en rechts onderin de 2 buttons naast elkaar met versturen en annuleren
+*/
+
+/* redelijk complete code:
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { saveAs } from "file-saver";
+
+const weekDays = ["maandag", "dinsdag", "woensdag", "donderdag", "vrijdag"];
+const pauzeOpties = [15, 30, 45, 60];
+
+export default function HourRegistration() {
+  const navigate = useNavigate();
+  const [week, setWeek] = useState("");
+  const [opmerking, setOpmerking] = useState("");
+  const [contractUren] = useState(40); // standaard
+  const [toonVerzonden, setToonVerzonden] = useState(false);
+  const [toonAnnuleren, setToonAnnuleren] = useState(false);
+
+  const [dagen, setDagen] = useState(() =>
+    weekDays.reduce((acc, dag) => {
+      acc[dag] = {
+        startTijd: "",
+        eindTijd: "",
+        pauze: "",
+        reistijd: "",
+        pauzeGekozen: false, // Nieuw veld om te controleren of de gebruiker een keuze heeft gemaakt
+      };
+      return acc;
+    }, {})
+  );
+
+  const handleInput = (dag, veld, waarde) => {
+    setDagen({
+      ...dagen,
+      [dag]: {
+        ...dagen[dag],
+        [veld]: waarde,
+      },
+    });
+  };
+
+  const berekenTijd = (start, eind, pauze) => {
+    if (!start || !eind) return 0;
+    const [sh, sm] = start.split(":").map(Number);
+    const [eh, em] = eind.split(":").map(Number);
+    let min = eh * 60 + em - (sh * 60 + sm) - parseInt(pauze);
+    return Math.max(min, 0);
+  };
+
+  const totaalGewerkteTijd = weekDays.reduce((acc, dag) => {
+    const { startTijd, eindTijd, pauze, reistijd } = dagen[dag];
+    const werktijd = berekenTijd(startTijd, eindTijd, pauze);
+    const totaalMinuten = werktijd + (parseInt(reistijd) || 0);
+    return acc + totaalMinuten / 60;
+  }, 0);
+
+  const verschil = parseFloat((totaalGewerkteTijd - contractUren).toFixed(2));
+  const verschilKleur =
+    verschil > 0 ? "text-green-600" : verschil < 0 ? "text-red-600" : "";
+
+  const formulierVolledig =
+    week &&
+    weekDays.every(
+      (dag) =>
+        dagen[dag].startTijd && dagen[dag].eindTijd && dagen[dag].pauze !== ""
+    );
+
+  const handleSubmit = () => {
+    if (!formulierVolledig) {
+      alert("Vul alle dagen volledig in.");
+      return;
+    }
+
+    const data = {
+      userId: 1, // hardcoded, aanpassen bij login-functionaliteit
+      week: parseInt(week),
+      jaar: new Date().getFullYear(),
+      dagen: {},
+      totaalGewerkteTijd: parseFloat(totaalGewerkteTijd.toFixed(2)),
+      normaleWerkweek: contractUren,
+      verschil,
+      opmerking,
+      ingediend: true,
+    };
+
+    weekDays.forEach((dag) => {
+      const { startTijd, eindTijd, pauze, reistijd } = dagen[dag];
+      const gewerkteMinuten = berekenTijd(startTijd, eindTijd, pauze);
+      const gewerkteTijd = parseFloat(
+        ((gewerkteMinuten + (parseInt(reistijd) || 0)) / 60).toFixed(2)
+      );
+      data.dagen[dag] = {
+        startTijd,
+        eindTijd,
+        pauze: parseInt(pauze),
+        reistijd: parseInt(reistijd) || 0,
+        gewerkteTijd,
+      };
+    });
+
+    // Voeg nieuwe registratie toe aan bestaand JSON bestand
+    const fileData = JSON.stringify(data, null, 2);
+    const blob = new Blob([fileData], { type: "application/json" });
+    saveAs(blob, `urenregistratie_week${week}.json`);
+
+    setToonVerzonden(true);
+    setTimeout(() => navigate("/"), 3000);
+  };
+
+  const bevestigAnnuleren = () => {
+    setToonAnnuleren(false);
+    navigate("/");
+  };
+
+  return (
+    <div className="p-4 bg-white rounded text-black">
+      <label className="block mb-4 font-bold">
+        Weeknummer:
+        <input
+          type="number"
+          value={week}
+          onChange={(e) => setWeek(e.target.value)}
+          className="block border p-2 rounded mt-1 w-full md:w-32"
+        />
+      </label>
+
+      {weekDays.map((dag) => (
+        <div key={dag} className="mb-6">
+          <h3 className="font-bold mb-2 capitalize">{dag}</h3>
+          <input
+            type="time"
+            value={dagen[dag].startTijd}
+            onChange={(e) => handleInput(dag, "startTijd", e.target.value)}
+            className="block mb-2 p-2 border rounded w-full md:w-60"
+            placeholder="Starttijd"
+          />
+          <input
+            type="time"
+            value={dagen[dag].eindTijd}
+            onChange={(e) => handleInput(dag, "eindTijd", e.target.value)}
+            className="block mb-2 p-2 border rounded w-full md:w-60"
+            placeholder="Eindtijd"
+          />
+          <div className="mb-2">
+            <label className="block font-bold">Pauze:</label>
+            <div className="relative">
+              <button
+                type="button"
+                className="block p-2 border rounded w-full md:w-60"
+                onClick={() =>
+                  setDagen({
+                    ...dagen,
+                    [dag]: {
+                      ...dagen[dag],
+                      pauzeGekozen: !dagen[dag].pauzeGekozen, // Toggle pauze options
+                    },
+                  })
+                }
+              >
+                {dagen[dag].pauze
+                  ? `Pauze: ${dagen[dag].pauze} min`
+                  : "Hoe lang heb je pauze genomen?"}
+              </button>
+
+              {dagen[dag].pauzeGekozen && (
+                <div className="absolute left-0 top-full bg-white border border-gray-300 w-full mt-1 rounded-md shadow-lg">
+                  {pauzeOpties.map((optie) => (
+                    <button
+                      key={optie}
+                      onClick={() => {
+                        handleInput(dag, "pauze", optie);
+                        setDagen({
+                          ...dagen,
+                          [dag]: {
+                            ...dagen[dag],
+                            pauzeGekozen: false, // Hide the options once a selection is made
+                          },
+                        });
+                      }}
+                      className="block w-full p-2 text-left hover:bg-gray-100"
+                    >
+                      Pauze: {optie} min
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+          <input
+            type="number"
+            value={dagen[dag].reistijd}
+            onChange={(e) => handleInput(dag, "reistijd", e.target.value)}
+            className="block mb-2 p-2 border rounded w-full md:w-60"
+            placeholder="Reistijd in minuten"
+          />
+        </div>
+      ))}
+
+      <div className="mb-4 font-semibold">
+        Totaal gewerkte tijd: {totaalGewerkteTijd.toFixed(2)} uur
+        <div className={verschilKleur}>
+          {verschil !== 0 &&
+            `Verschil: ${verschil > 0 ? "+" : ""}${verschil} uur`}
+        </div>
+      </div>
+
+      <textarea
+        value={opmerking}
+        onChange={(e) => setOpmerking(e.target.value)}
+        placeholder="Opmerkingen"
+        className="block border rounded p-2 w-full h-24 mb-4"
+      />
+
+      <div className="flex flex-col md:flex-row md:justify-end gap-4">
+        <button
+          onClick={handleSubmit}
+          className="bg-green-600 text-white px-4 py-2 rounded"
+        >
+          Versturen
+        </button>
+        <button
+          onClick={() => setToonAnnuleren(true)}
+          className="bg-red-500 text-white px-4 py-2 rounded"
+        >
+          Annuleren
+        </button>
+      </div>
+
+      {toonVerzonden && (
+        <div className="mt-4 p-4 bg-blue-100 text-center rounded shadow">
+          De uren zijn succesvol verstuurd. U keert nu terug naar de homepagina.
+        </div>
+      )}
+
+      {toonAnnuleren && (
+        <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50">
+          <div className="bg-white p-6 rounded-md text-center w-96">
+            <p>Weet u zeker dat u terug wilt? Wijzigingen gaan verloren.</p>
+            <div className="mt-4">
+              <button
+                onClick={bevestigAnnuleren}
+                className="bg-red-500 text-white px-6 py-2 rounded-md mr-4"
+              >
+                Ja
+              </button>
+              <button
+                onClick={() => setToonAnnuleren(false)}
+                className="bg-gray-300 text-black px-6 py-2 rounded-md"
+              >
+                Nee
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+*/

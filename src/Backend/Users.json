@@ -1,0 +1,67 @@
+[
+  {
+    "id": 1,
+    "firstName": "Rens",
+    "lastName": "Bals",
+    "adress": "testlaan 20",
+    "postalCode": "1234AB",
+    "city": "Roosendaal",
+    "department": "kantoor",
+    "email": "testmail@gmail.com",
+    "password": "testWachtwoord123!"
+  },
+  {
+    "firstName": "test",
+    "lastName": "gebruiker",
+    "address": "testlaan 10",
+    "postalCode": "1234AB",
+    "city": "Amsterdam",
+    "department": "loonwerk",
+    "email": "sjaaktrekhaak@test.com",
+    "password": "$2b$10$KSHG80tUI3Lw4nEQqI8qNeGC/rlO8u8jxCV/gVSAXsVlMMQBTkHmq"
+  },
+  {
+    "id": "c1ce3edf-284b-4ece-8e8a-cb2def18ecb8",
+    "firstName": "arie",
+    "lastName": "kanarie",
+    "address": "vogellaan 10",
+    "postalCode": "7894qw",
+    "city": "Amsterdam",
+    "department": "grondwerk",
+    "email": "ariekanarie@test.nl",
+    "password": "$2b$10$a3yURQ7BZ5UUMSY6tgqwMebMAodX1iiFVrTeprVvAlKufvavhIHte"
+  },
+  {
+    "id": "7f8d8574-a414-4a47-bfcb-e79393b20adc",
+    "firstName": "admin",
+    "lastName": "admin",
+    "address": "testlaan 10",
+    "postalCode": "7894qw",
+    "city": "Amsterdam",
+    "department": "kantoor",
+    "email": "admin@test.nl",
+    "password": "$2b$10$njP74kMQEA3.RYzX4Pd8ROVwdbJBKqfzkBgm/AEezOCOKOrqhuMSW"
+  },
+  {
+    "id": "827c2049-5ff9-4b1a-b115-2f4baca15190",
+    "firstName": "admin2",
+    "lastName": "admin2",
+    "address": "admin2laan",
+    "postalCode": "7894ab",
+    "city": "Amsterdam",
+    "department": "kantoor",
+    "email": "admin2@testmail.com",
+    "password": "$2b$10$.DYuO1iMLvaB8svtnctfw.AQSEMN0120NL4BdWE543oHheVq4lXxa"
+  },
+  {
+    "id": "4f58be70-25b4-44d3-b27a-4f8531587c49",
+    "firstName": "Rens",
+    "lastName": "Admin",
+    "address": "adminlaan 10",
+    "postalCode": "1234 RB",
+    "city": "Roosendaal",
+    "department": "kantoor",
+    "email": "adminrens@testmail.com",
+    "password": "$2b$10$m1JtnjILPVGdnOx5LqbrhO5iVLxt0j5hiR58X7sB0FFxtl4SL3lMK"
+  }
+]
