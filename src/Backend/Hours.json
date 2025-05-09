@@ -502,5 +502,87 @@
     "overUnderHours": "0.75",
     "createdAt": "2025-05-07T17:51:04.250Z",
     "ingediend": true
+  },
+  {
+    "userId": "4f58be70-25b4-44d3-b27a-4f8531587c49",
+    "weekNumber": 20,
+    "data": {
+      "Maandag": {
+        "start": "08:00",
+        "end": "16:45",
+        "break": "30",
+        "travel": "15"
+      },
+      "Dinsdag": {
+        "start": "08:00",
+        "end": "17:00",
+        "break": "30",
+        "travel": "30"
+      },
+      "Woensdag": {
+        "start": "08:00",
+        "end": "17:00",
+        "break": "30",
+        "travel": "30"
+      },
+      "Donderdag": {
+        "start": "08:30",
+        "end": "17:00",
+        "break": "30",
+        "travel": "30"
+      },
+      "Vrijdag": {
+        "start": "08:00",
+        "end": "16:30",
+        "break": "30",
+        "travel": "30"
+      }
+    },
+    "remarks": "test mail cliënt",
+    "totalHours": "41.00",
+    "overUnderHours": "1.00",
+    "createdAt": "2025-05-09T12:06:32.371Z",
+    "ingediend": true
+  },
+  {
+    "userId": "4f58be70-25b4-44d3-b27a-4f8531587c49",
+    "weekNumber": 21,
+    "data": {
+      "Maandag": {
+        "start": "08:00",
+        "end": "16:30",
+        "break": "30",
+        "travel": "0"
+      },
+      "Dinsdag": {
+        "start": "06:00",
+        "end": "15:30",
+        "break": "30",
+        "travel": "30"
+      },
+      "Woensdag": {
+        "start": "07:30",
+        "end": "16:30",
+        "break": "30",
+        "travel": "30"
+      },
+      "Donderdag": {
+        "start": "08:00",
+        "end": "16:30",
+        "break": "30",
+        "travel": ""
+      },
+      "Vrijdag": {
+        "start": "07:15",
+        "end": "15:45",
+        "break": "30",
+        "travel": "30"
+      }
+    },
+    "remarks": "mail test 2",
+    "totalHours": "40.50",
+    "overUnderHours": "0.50",
+    "createdAt": "2025-05-09T12:15:51.912Z",
+    "ingediend": true
   }
 ]

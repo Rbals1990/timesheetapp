@@ -171,6 +171,16 @@ export default function NewRegistration() {
       if (response.ok) {
         exportToExcel(payload, user); // <-- Excel export hier
         setShowSuccess(true);
+        //mailto link, open in email client
+        const subject = `Uren week ${weekNumber} ${new Date().getFullYear()} ${
+          user.firstName
+        } ${user.lastName}`;
+        const body = `Geachte,\n\nHierbij de urenregistratie voor week ${weekNumber}.\n\nMet vriendelijke groet,\n${user.firstName} ${user.lastName}`;
+        const mailtoLink = `mailto:?subject=${encodeURIComponent(
+          subject
+        )}&body=${encodeURIComponent(body)}`;
+
+        window.location.href = mailtoLink;
         setTimeout(() => navigate("/"), 3000);
       } else {
         console.error("Fout bij verzenden:", await response.text());
