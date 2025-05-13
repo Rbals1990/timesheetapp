@@ -94,7 +94,7 @@ export default function NewRegistration() {
     lastName: string;
   };
 
-  const exportToExcel = (payload: Payload, user: User) => {
+  const exportToExcel = (_payload: Payload, user: User) => {
     const year = new Date().getFullYear();
     const headerText = `Week ${weekNumber} ${year} ingediend door: ${user.firstName} ${user.lastName}`;
 
