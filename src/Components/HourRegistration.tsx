@@ -8,18 +8,21 @@ const weekDays = ["Maandag", "Dinsdag", "Woensdag", "Donderdag", "Vrijdag"];
 
 export default function NewRegistration() {
   const navigate = useNavigate();
-  const [weekNumber, setWeekNumber] = useState("");
+  const [weekNumber, setWeekNumber] = useState<string>("");
   const [form, setForm] = useState(
     Object.fromEntries(weekDays.map((day) => [day, { ...defaultDay }]))
   );
   const [remarks, setRemarks] = useState("");
   const [showSuccess, setShowSuccess] = useState(false);
   const [showCancelConfirm, setShowCancelConfirm] = useState(false);
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState<ErrorsState>({});
 
   const contractHours = 40;
+  type DayField = "start" | "end" | "break" | "travel";
+  type ErrorFields = Partial<Record<DayField, boolean>>;
+  type ErrorsState = Partial<Record<string, ErrorFields>>;
 
-  const handleChange = (day, field, value) => {
+  const handleChange = (day: string, field: DayField, value: string) => {
     setForm((prev) => ({
       ...prev,
       [day]: {
@@ -29,7 +32,7 @@ export default function NewRegistration() {
     }));
   };
 
-  const validateField = (day, field, value) => {
+  const validateField = (day: string, field: DayField, value: string) => {
     setErrors((prev) => ({
       ...prev,
       [day]: {
@@ -39,7 +42,7 @@ export default function NewRegistration() {
     }));
   };
 
-  const calculateTotalTime = (start, end, pause) => {
+  const calculateTotalTime = (start: string, end: string, pause: string) => {
     if (!start || !end) return 0;
     const [h1, m1] = start.split(":").map(Number);
     const [h2, m2] = end.split(":").map(Number);
@@ -61,7 +64,7 @@ export default function NewRegistration() {
   const hoursWorked = ((totalWorkedMinutes - totalBreakMinutes) / 60).toFixed(
     2
   );
-  const overUnder = (hoursWorked - contractHours).toFixed(2);
+  const overUnder = (parseFloat(hoursWorked) - contractHours).toFixed(2);
 
   const isFormValid = () =>
     weekNumber &&
@@ -69,7 +72,29 @@ export default function NewRegistration() {
       (day) => form[day].start && form[day].end && form[day].break
     );
 
-  const exportToExcel = (payload, user) => {
+  type DayEntry = {
+    start: string;
+    end: string;
+    break: string;
+    travel: string;
+  };
+
+  type Payload = {
+    userId: string;
+    weekNumber: string;
+    data: Record<string, DayEntry>;
+    remarks: string;
+    totalHours: string;
+    overUnderHours: string;
+    createdAt: string;
+  };
+
+  type User = {
+    firstName: string;
+    lastName: string;
+  };
+
+  const exportToExcel = (payload: Payload, user: User) => {
     const year = new Date().getFullYear();
     const headerText = `Week ${weekNumber} ${year} ingediend door: ${user.firstName} ${user.lastName}`;
 
@@ -125,12 +150,12 @@ export default function NewRegistration() {
   };
 
   const handleSubmit = async () => {
-    const newErrors = {};
+    const newErrors: ErrorsState = {};
     let hasError = false;
 
     weekDays.forEach((day) => {
-      const dayErrors = {};
-      ["start", "end", "break"].forEach((field) => {
+      const dayErrors: Partial<Record<DayField, boolean>> = {};
+      (["start", "end", "break"] as DayField[]).forEach((field) => {
         if (!form[day][field]) {
           dayErrors[field] = true;
           hasError = true;
@@ -148,8 +173,9 @@ export default function NewRegistration() {
       return;
     }
 
-    const user = JSON.parse(localStorage.getItem("user"));
-    const userId = user?.id;
+    const user = localStorage.getItem("user");
+    const parsedUser = user ? JSON.parse(user) : null;
+    const userId = parsedUser?.id;
 
     const payload = {
       userId,
@@ -169,13 +195,13 @@ export default function NewRegistration() {
       });
 
       if (response.ok) {
-        exportToExcel(payload, user); // <-- Excel export hier
+        exportToExcel(payload, parsedUser); // <-- Excel export hier
         setShowSuccess(true);
         //mailto link, open in email client
         const subject = `Uren week ${weekNumber} ${new Date().getFullYear()} ${
-          user.firstName
-        } ${user.lastName}`;
-        const body = `Geachte,\n\nHierbij de urenregistratie voor week ${weekNumber}.\n\nMet vriendelijke groet,\n${user.firstName} ${user.lastName}`;
+          parsedUser.firstName
+        } ${parsedUser.lastName}`;
+        const body = `Geachte,\n\nHierbij de urenregistratie voor week ${weekNumber}.\n\nMet vriendelijke groet,\n${parsedUser.firstName} ${parsedUser.lastName}`;
         const mailtoLink = `mailto:?subject=${encodeURIComponent(
           subject
         )}&body=${encodeURIComponent(body)}`;
@@ -206,7 +232,7 @@ export default function NewRegistration() {
         <input
           type="number"
           value={weekNumber}
-          onChange={(e) => setWeekNumber(Number(e.target.value))}
+          onChange={(e) => setWeekNumber(e.target.value.toString())}
           className="w-full border px-4 py-2 rounded-md"
         />
       </div>
@@ -312,7 +338,7 @@ export default function NewRegistration() {
           <span className="font-semibold">{hoursWorked} uur</span>
         </p>
         <p>
-          {overUnder >= 0 ? (
+          {parseFloat(overUnder) >= 0 ? (
             <span className="text-green-600">
               +{overUnder} uur over gewerkt
             </span>

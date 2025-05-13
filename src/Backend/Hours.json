@@ -216,47 +216,7 @@
     "createdAt": "2025-05-07T12:29:26.024Z",
     "ingediend": true
   },
-  {
-    "userId": "827c2049-5ff9-4b1a-b115-2f4baca15190",
-    "weekNumber": 12,
-    "data": {
-      "Maandag": {
-        "start": "08:00",
-        "end": "16:30",
-        "break": "30",
-        "travel": "30"
-      },
-      "Dinsdag": {
-        "start": "08:00",
-        "end": "16:30",
-        "break": "30",
-        "travel": "30"
-      },
-      "Woensdag": {
-        "start": "08:00",
-        "end": "16:45",
-        "break": "30",
-        "travel": "30"
-      },
-      "Donderdag": {
-        "start": "08:00",
-        "end": "17:30",
-        "break": "30",
-        "travel": "30"
-      },
-      "Vrijdag": {
-        "start": "08:30",
-        "end": "17:45",
-        "break": "30",
-        "travel": "30"
-      }
-    },
-    "remarks": "test3",
-    "totalHours": "42.00",
-    "overUnderHours": "2.00",
-    "createdAt": "2025-05-07T14:51:52.808Z",
-    "ingediend": true
-  },
+
   {
     "userId": "c1ce3edf-284b-4ece-8e8a-cb2def18ecb8",
     "weekNumber": 1,

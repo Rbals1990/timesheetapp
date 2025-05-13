@@ -1,10 +1,28 @@
 import { useEffect, useState } from "react";
 
 export default function WeeklyOverview() {
-  const [registrations, setRegistrations] = useState([]);
+  const [registrations, setRegistrations] = useState<WeekRegistration[]>([]);
   const [loading, setLoading] = useState(true);
   const userId = localStorage.getItem("userId");
   const user = JSON.parse(localStorage.getItem("user") || "{}");
+
+  interface DayData {
+    start: string;
+    end: string;
+    break: string;
+    travel: string;
+  }
+
+  interface WeekRegistration {
+    weekNumber: number;
+    createdAt: string;
+    data: {
+      [day: string]: DayData;
+    };
+    totalHours: number;
+    overUnderHours: number;
+    remarks?: string;
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -55,8 +73,8 @@ export default function WeeklyOverview() {
               <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
                 {Object.entries(week.data).map(([day, values]) => {
                   const workedMinutes =
-                    (new Date(`1970-01-01T${values.end}`) -
-                      new Date(`1970-01-01T${values.start}`)) /
+                    (new Date(`1970-01-01T${values.end}`).getTime() -
+                      new Date(`1970-01-01T${values.start}`).getTime()) /
                       60000 -
                     (parseInt(values.break) || 0);
 
