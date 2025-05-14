@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import API_URL from "../Backend/config.ts";
 
 export default function Register() {
   const [formValues, setFormValues] = useState({
@@ -61,7 +62,7 @@ export default function Register() {
     e.preventDefault();
     if (validatePassword()) {
       try {
-        const response = await fetch("http://localhost:5000/register", {
+        const response = await fetch(`${API_URL}/register`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

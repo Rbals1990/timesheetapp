@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import API_URL from "../Backend/config";
 
 export default function WeeklyOverview() {
   const [registrations, setRegistrations] = useState<WeekRegistration[]>([]);
@@ -27,9 +28,7 @@ export default function WeeklyOverview() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch(
-          `http://localhost:5000/urenregistraties?userId=${userId}`
-        );
+        const res = await fetch(`${API_URL}/urenregistraties?userId=${userId}`);
         const data = await res.json();
 
         setRegistrations(data);
