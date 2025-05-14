@@ -12,7 +12,7 @@ import nodemailer from "nodemailer";
 //.env configuratie laden
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-dotenv.config({ path: path.resolve(__dirname, ".env") });
+dotenv.config({ path: path.resolve(__dirname, ".env.local") });
 
 //routes
 
@@ -23,7 +23,7 @@ const PORT = process.env.PORT || 5000;
 app.use(express.json());
 app.use(
   cors({
-    origin: "https://registertimesheet.netlify.app/" || "http://localhost:5173",
+    origin: ["https://registertimesheet.netlify.app/", "http://localhost:5173"],
     credentials: true,
   })
 );
