@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import API_URL from "../Backend/config";
+import API_URL from "../utils/config";
 
 export default function WeeklyOverview() {
   const [registrations, setRegistrations] = useState<WeekRegistration[]>([]);

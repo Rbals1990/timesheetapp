@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import API_URL from "../Backend/config";
+import API_URL from "../utils/config";
 
 export default function Contact() {
   const navigate = useNavigate();

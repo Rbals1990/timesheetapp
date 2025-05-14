@@ -20,5 +20,5 @@
   "ts-node": {
     "esm": true
   },
-  "include": ["vite.config.ts", "src/Backend"]
+  "include": ["vite.config.ts", "src/Backend", "src/utils/config.ts"]
 }
