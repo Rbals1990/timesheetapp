@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import API_URL from "../utils/config.ts";
+import API_URL from "../utils/config";
 
 export default function Register() {
   const [formValues, setFormValues] = useState({

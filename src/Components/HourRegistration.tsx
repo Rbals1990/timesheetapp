@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
-import API_URL from "../utils/config.ts";
+import API_URL from "../utils/config";
 
 const defaultDay = { start: "", end: "", break: "", travel: "" };
 const weekDays = ["Maandag", "Dinsdag", "Woensdag", "Donderdag", "Vrijdag"];
