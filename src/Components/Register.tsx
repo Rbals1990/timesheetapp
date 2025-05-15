@@ -4,7 +4,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import API_URL from "../utils/config";
 
 export default function Register() {
-  const [formValues, setFormValues] = useState({
+  const [formValues, setFormValues] = useState<Record<string, string>>({
     firstName: "",
     lastName: "",
     address: "",
@@ -78,7 +78,7 @@ export default function Register() {
           console.log("User registered:", data);
           navigate("/login");
         } else {
-          console.error("Registration failed:", data);
+          alert(data.message || "Registratie mislukt.");
         }
       } catch (error) {
         console.error("Error during registration:", error);
@@ -93,24 +93,71 @@ export default function Register() {
           Account aanmaken
         </h2>
 
-        {/* ... andere invoervelden blijven ongewijzigd ... */}
+        {/* Algemene gegevens */}
+        {[
+          {
+            label: "Voornaam",
+            name: "firstName",
+            type: "text",
+            placeholder: "Voornaam",
+          },
+          {
+            label: "Achternaam",
+            name: "lastName",
+            type: "text",
+            placeholder: "Achternaam",
+          },
+          {
+            label: "Adres",
+            name: "address",
+            type: "text",
+            placeholder: "Straatnaam en huisnummer",
+          },
+          {
+            label: "Postcode",
+            name: "postalCode",
+            type: "text",
+            placeholder: "1234 AB",
+          },
+          {
+            label: "Stad",
+            name: "city",
+            type: "text",
+            placeholder: "Woonplaats",
+          },
+          {
+            label: "Afdeling",
+            name: "department",
+            type: "text",
+            placeholder: "Bijv. Loonwerk, Grondwerk",
+          },
+          {
+            label: "Email",
+            name: "email",
+            type: "email",
+            placeholder: "Email invoeren",
+          },
+        ].map((field) => (
+          <div className="mb-4" key={field.name}>
+            <label
+              htmlFor={field.name}
+              className="block text-sm font-medium mb-1"
+            >
+              {field.label}
+            </label>
+            <input
+              id={field.name}
+              name={field.name}
+              type={field.type}
+              placeholder={field.placeholder}
+              value={formValues[field.name]}
+              onChange={handleChange}
+              className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#2D4739]"
+            />
+          </div>
+        ))}
 
-        <div className="mb-4">
-          <label htmlFor="email" className="block text-sm font-medium mb-1">
-            Email
-          </label>
-          <input
-            id="email"
-            name="email"
-            type="email"
-            placeholder="Email invoeren"
-            value={formValues.email}
-            onChange={handleChange}
-            className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#2D4739]"
-          />
-        </div>
-
-        {/* Wachtwoord en Bevestig Wachtwoord velden */}
+        {/* Wachtwoord */}
         <div className="mb-1 flex items-center relative">
           <input
             id="password"
@@ -137,6 +184,7 @@ export default function Register() {
           <p className="text-sm text-red-600 mb-4">{errors.password}</p>
         )}
 
+        {/* Bevestig wachtwoord */}
         <div className="mb-1 flex items-center relative">
           <input
             id="confirmPassword"
@@ -159,11 +207,15 @@ export default function Register() {
             )}
           </button>
         </div>
+        <p className="text-sm text-gray-500">
+          Let op! Wachtwoord moet minimaal 10 karakters lang zijn en minimaal 1
+          hoofdletter, 1 getal, en 1 speciaal teken bevatten.{" "}
+        </p>
         {errors.confirmPassword && (
           <p className="text-sm text-red-600 mb-6">{errors.confirmPassword}</p>
         )}
 
-        {/* Footer: Login link + Register knop */}
+        {/* Footer */}
         <div className="flex items-center justify-between">
           <Link to="/login" className="text-sm text-[#2D4739] hover:underline">
             Al een account? Login
